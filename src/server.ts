@@ -1,21 +1,25 @@
-import { sequelize } from './config/database.js';
-import { env } from './config/env.js';
-import { app } from './app.js';
+import dotenv from 'dotenv';
+dotenv.config();
+
+import app from './app.js';
+import { sequelize } from './models/index.model.js';
+
+const PORT = process.env.PORT || 3000;
 
 async function start() {
   try {
     await sequelize.authenticate();
-    console.log('Database connection established');
+    console.log('Conexion a PostgreSQL exitosa');
 
     await sequelize.sync();
-    console.log('Database models synchronized');
+    console.log('Modelos sincronizados con la base de datos');
 
-    app.listen(env.port, () => {
-      console.log(`Server running on http://localhost:${env.port}`);
-      console.log(`Swagger available on http://localhost:${env.port}/api/docs`);
+    app.listen(PORT, () => {
+      console.log(`Servidor corriendo en http://localhost:${PORT}`);
+      console.log(`Documentacion Swagger en http://localhost:${PORT}/api-docs`);
     });
   } catch (error) {
-    console.error('Application startup failed', error);
+    console.error('No se pudo iniciar el servidor:', error);
     process.exit(1);
   }
 }
