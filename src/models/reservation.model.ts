@@ -5,7 +5,7 @@ interface ReservationAttributes {
   id: number;
   userId: number;
   workspaceId: number;
-  reservationDate: Date;
+  reservationDate: string;
   createdAt?: Date;
   UpdatedAt?: Date;
 }
@@ -22,7 +22,7 @@ class Reservation
   declare public id: number;
   declare public userId: number;
   declare public workspaceId: number;
-  declare public reservationDate: Date;
+  declare public reservationDate: string;
   declare public readonly createdAt: Date;
   declare public readonly UpdatedAt: Date;
 }
