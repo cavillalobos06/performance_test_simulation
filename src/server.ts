@@ -3,11 +3,13 @@ dotenv.config();
 
 import app from './app.js';
 import { sequelize } from './models/index.model.js';
+import { ensureDatabaseExists } from './config/createDatabase.js';
 
 const PORT = process.env.PORT || 3000;
 
 async function start() {
   try {
+    await ensureDatabaseExists();
     await sequelize.authenticate();
     console.log('Conexion a PostgreSQL exitosa');
 
